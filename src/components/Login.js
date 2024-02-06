@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Login = ({ onLogin }) => {
+  const { loginWithRedirect } = useAuth0();
   const [formValues, setFormValues] = useState({
     email: 'test@gmail.com',
     password: 'test@123',
@@ -65,7 +67,7 @@ const Login = ({ onLogin }) => {
             </p>
           </div>
           <div className="flex gap-7 mb-7 lg:mb-0">
-            <div className="bg-[white] flex items-center gap-[11px] px-[21px] rounded-[10px] cursor-pointer">
+            <div className="bg-[white] flex items-center gap-[11px] px-[21px] rounded-[10px] cursor-pointer" onClick={loginWithRedirect}>
                <img src="/google.svg"/>
               <p className="font-montserrat text-[10px] lg:text-[12px] mt-[9px] mb-[8px]">
                 Sign in with Google
