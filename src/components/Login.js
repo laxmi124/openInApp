@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
-import { useAuth0 } from '@auth0/auth0-react';
 
-const Login = () => {
-  const {loginWithRedirect} = useAuth0()
+const Login = ({ onLogin }) => {
   const [formValues, setFormValues] = useState({
-    email: '',
-    password: '',
+    email: 'test@gmail.com',
+    password: 'test@123',
   })
   const [formError, setFormError] = useState(null)
-
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormValues((prev) => ({
@@ -16,7 +13,6 @@ const Login = () => {
       [name]: value,
     }))
   }
-
   const handleSignIn = () => {
     // eslint-disable-next-line
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formValues.email)) {
@@ -28,8 +24,9 @@ const Login = () => {
       return
     }
     setFormError(null)
+    onLogin(true)
+    // navigate('/home')
   }
-
   return (
     <div className="w-screen h-screen flex flex-col lg:flex-row bg-bgbody">
       <div className="lg:basis-1/2 bg-primary clip">
@@ -42,10 +39,19 @@ const Login = () => {
           </div>
         </div>
         <div className="fixed bottom-[13vw] lg:bottom-[4.7vw] flex left-[50%] translate-x-[-50%] lg:left-[10vw] lg:translate-x-0 items-center gap-4 lg:gap-8">
+          <div className="hidden md:flex flex-row gap-4">
             <img src='/gitHub.svg' />
             <img src='/twitter.svg' />
             <img src='/linkedin.svg' />
             <img src='/discord.svg' />
+          </div>
+
+          <div className="md:hidden flex flex-row gap-4">
+            <img src='mobileIcons/gitHub.svg' />
+            <img src='mobileIcons/twitter.svg' />
+            <img src='mobileIcons/linkedin.svg' />
+            <img src='mobileIcons/discord.svg' />
+            </div>
         </div>
       </div>
       <div className="lg:basis-1/2 flex items-center justify-center lg:justify-normal">
@@ -59,14 +65,14 @@ const Login = () => {
             </p>
           </div>
           <div className="flex gap-7 mb-7 lg:mb-0">
-            <div className="bg-[white] flex items-center gap-[11px] px-[21px] rounded-[10px] cursor-pointer" onClick={loginWithRedirect}>
-              <img src="/google.svg"/>
+            <div className="bg-[white] flex items-center gap-[11px] px-[21px] rounded-[10px] cursor-pointer">
+               <img src="/google.svg"/>
               <p className="font-montserrat text-[10px] lg:text-[12px] mt-[9px] mb-[8px]">
                 Sign in with Google
               </p>
             </div>
             <div className="bg-[white] flex items-center gap-[11px] px-[21px] rounded-[10px] cursor-pointer">
-               <img src="/apple.svg"/>
+              <img src="/apple.svg"/>
               <p className="font-montserrat text-[10px] lg:text-[12px] mt-[9px] mb-[8px]">
                 Sign in with Apple
               </p>
