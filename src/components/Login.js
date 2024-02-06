@@ -4,8 +4,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 const Login = ({ onLogin }) => {
   const { loginWithRedirect } = useAuth0();
   const [formValues, setFormValues] = useState({
-    email: 'test@gmail.com',
-    password: 'test@123',
+    email: '',
+    password: '',
   })
   const [formError, setFormError] = useState(null)
   const handleChange = (e) => {
